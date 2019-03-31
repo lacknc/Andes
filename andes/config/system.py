@@ -27,6 +27,9 @@ class System(ConfigBase):
         self.forcepq = False
         self.forcez = False
         self.base = True
+        self.dime_enable = False
+        self.dime_name = 'sim'
+        self.dime_server = 'ipc:///tmp/dime'
         super(System, self).__init__(**kwargs)
 
     @cached
@@ -58,7 +61,7 @@ class System(ConfigBase):
             self.sparselib = 'umfpack'
 
         if self.sparselib == 'klu' and not KLU:
-            logger.info("cvxoptklu import error. Fall back to umfpack".format(self.sparselib))
+            logger.info("Optional package \"cvxoptklu\" available for speed up")
             self.sparselib = 'umfpack'
 
         return True

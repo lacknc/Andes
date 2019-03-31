@@ -3,7 +3,7 @@ __version__ = get_versions()['version']
 del get_versions
 
 from . import main  # NOQA
-from . import plot  # NOQA
+from . import filters  # NOQA
 
 __author__ = 'Hantao Cui'
 

@@ -57,7 +57,7 @@ setup(
         ]
     },
     install_requires=requirements,
-    license="BSD (3-clause)",
+    license="Apache Software License",
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Natural Language :: English',

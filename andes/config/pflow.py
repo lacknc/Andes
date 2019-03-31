@@ -1,5 +1,7 @@
 from . import ConfigBase
 from ..utils.cached import cached
+import logging
+logger = logging.getLogger(__name__)
 
 
 class Pflow(ConfigBase):
@@ -10,11 +12,10 @@ class Pflow(ConfigBase):
         self.pv2pq = False
         self.ipv2pq = 4
         self.npv2pq = 1
-        self.iter = 0
         self.report = 'default'
         self.show = True
         self.method = 'NR'
-        self.method_alt = ['NR', 'FDPF', 'FDBX', 'FDXB']
+        self.method_alt = ['NR', 'FDPF', 'FDBX', 'FDXB', 'DCPF']
         self.sortbuses = 'data'
         self.sortbuses_alt = ['data', 'idx']
         self.static = False
@@ -43,4 +44,9 @@ class Pflow(ConfigBase):
     def check(self):
         if self.method not in self.method_alt:
             self.method = 'NR'
+        if self.method == 'DCPF':
+            self.flatstart = True
+        if self.pv2pq is True:
+            logger.info('Check PV reactive power if iter>={} or mismatch<={}'.
+                        format(int(self.ipv2pq), 1e4*self.tol))
         return True

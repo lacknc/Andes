@@ -113,6 +113,7 @@ class AGC(ModelBase):
 
         self.copy_data_ext('BArea', field='ace', idx=self.BArea)
 
+
     def fcall(self, dae):
         dae.f[self.Pagc] = mul(self.Ki, dae.y[self.ace])
 
@@ -120,9 +121,10 @@ class AGC(ModelBase):
         for idx, item in enumerate(self.syn):
             Kgen = div(self.M[idx], self.Mtot[idx])
             dae.g[self.pm[idx]] -= mul(self.usyn[idx], Kgen,
-                                       dae.x[self.Pagc[idx]])
+                        dae.x[self.Pagc[idx]])
 
     def jac0(self, dae):
+      
         dae.add_jac(Fy0, self.Ki, self.Pagc, self.ace)
 
     def gycall(self, dae):
